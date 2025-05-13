@@ -1,0 +1,31 @@
+{
+  "name": "orange-hrm-live-challenge",
+  "version": "1.0.0",
+  "description": "This is the repository to run the test for weather.com with playwright tyepscript and page object model",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env TEST_ENV=production playwright test",
+    "test:test": "cross-env TEST_ENV=test playwright test",
+    "test:login": "cross-env TEST_ENV=all playwright test --grep @login",
+    "test:search": "cross-env TEST_ENV=all playwright test --grep @search",
+    "test:headed": "cross-env TEST_ENV=production playwright test --headed",
+    "test:test:headed": "cross-env TEST_ENV=test playwright test --headed",
+    "test:debug": "cross-env TEST_ENV=production playwright test --debug",
+    "test:test:debug": "cross-env TEST_ENV=test playwright test --debug",
+    "allure:generate": "allure generate ./allure-results --clean",
+    "allure:open": "allure open ./allure-report",
+    "allure:serve": "allure serve ./allure-results"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^22.15.17",
+    "allure-playwright": "^3.2.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0"
+  }
+}
