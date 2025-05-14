@@ -4,6 +4,9 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-
+/allure-results/
+/allure-report/
+/allure-serve/
+/test-reports/
 .env.*
 !.env.example

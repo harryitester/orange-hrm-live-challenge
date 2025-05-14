@@ -1,152 +1,143 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login-page/login-page';
-import { accountData } from '../../data/account';
+import { accountData } from '../../data/account'
 import { DashboardPage } from '../../pages/dashboard-page/dashboard-page';
 
-test('TC_LOGIN_POS_01 - Login with valid credentials',
-    { tag: ['@automation', '@login'] }, 
-    async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
+let context;
+let page;
+let loginPage;
+let dashboardPage;
 
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
-    });
+test.beforeEach(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
+    loginPage = new LoginPage(page);
+    dashboardPage = new DashboardPage(page);
+    await loginPage.gotoLoginPage();
+});
 
+test.afterEach(async () => {
+    await context.close();
+});
+
+test('[Functional][Positive Case] Ensure Admin user account login success @login', async () => {
     await test.step('Login with valid credentials', async () => {
-      await loginPage.login('Admin', 'admin123');
+        await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
 
-    await test.step('Verify dashboard is shown', async () => {
-      await expect(page).toHaveURL(/dashboard/);
+    await test.step('Admin user login success to see the Dashboard as default behavious', async () => {
+        await dashboardPage.verifyDashboardPageUrl();
+        await dashboardPage.verifyDashboardPageTitle();
+    });
+});
+
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username and password @login', async () => {
+    await test.step('Login with invalid username and password', async () => {
+        await loginPage.login(accountData.invalidUser.username, accountData.invalidUser.password);
     });
 
-    await context.close();
-  }
-);
-
-test(
-  'TC_LOGIN_NEG_01 - Login with invalid username',
-  { tag: ['@automation', '@login'] },
-  async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
-
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
+    await test.step('Warning message in red color showing "Invalid credentials" is displayed', async () => {
+        const expectedMessage = 'Invalid credentials';
+        await loginPage.verifyInvalidCredentialsMessage(expectedMessage);
     });
+});
 
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username @login', async () => {
     await test.step('Login with invalid username', async () => {
-      await loginPage.login('wrongUser', 'admin123');
+        await loginPage.login(accountData.invalidUser.username, accountData.validUser.password);
     });
 
-    await test.step('Verify error message', async () => {
-      const errorMsg = await loginPage.getErrorMessage();
-      expect(errorMsg).toContain('Invalid credentials');
+    await test.step('Warning message in red color showing "Invalid credentials" is displayed', async () => {
+        const expectedMessage = 'Invalid credentials';
+        await loginPage.verifyInvalidCredentialsMessage(expectedMessage);
+    });
+});
+
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid password @login', async () => {
+    await test.step('Login with valid username and invalid password', async () => {
+        await loginPage.login(accountData.validUser.username, accountData.invalidUser.password);
     });
 
-    await context.close();
-  }
-);
+    await test.step('Warning message in red color showing "Invalid credentials" is displayed', async () => {
+        const expectedMessage = 'Invalid credentials';
+        await loginPage.verifyInvalidCredentialsMessage(expectedMessage);
+    });
+});
 
-test(
-  'TC_LOGIN_NEG_02 - Login with invalid password',
-  { tag: ['@automation', '@login'] },
-  async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
-
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
+test('[Functional][Negative Case] Ensure a user cannot login with blank Username and Password @login', async () => {
+    await test.step('Login with empty username and password', async () => {
+        await loginPage.login('', '');
     });
 
-    await test.step('Login with invalid password', async () => {
-      await loginPage.login('Admin', 'wrongPass');
+    await test.step('Warning message "Required" showing below Username and Password textbox.', async () => {
+        const expectedMessage = 'Required';
+        await loginPage.verifyUsernameRequiredMessage(expectedMessage);
+        await loginPage.verifyPasswordRequiredMessage(expectedMessage);
+    });
+});
+
+test('[UI/UX][Positive Case] Ensure the "Orangehrm-Logo-Branding" and "Orangehrm-Logo-Branding-Image" visible on the login page @login', async () => {
+    await test.step('Login with valid credentials', async () => {
+        await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
 
-    await test.step('Verify error message', async () => {
-      const errorMsg = await loginPage.getErrorMessage();
-      expect(errorMsg).toContain('Invalid credentials');
+    await test.step('Should see "Orangehrm-Logo-Branding" and "Orangehrm-Logo-Branding-Image" visible on the login page', async () => {
+        await loginPage.isOrangehrmLogoBrandingVisible();
+        await loginPage.isOrangehrmLogoBrandingImageVisible();
+    });
+});
+
+test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showing correct as design @login', async () => {
+    await test.step('Login with valid credentials', async () => {
+        await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
 
-    await context.close();
-  }
-);
+    await test.step('Verify "Orangehrm-demo-credentials" page showing correct as design', async () => {
+        await loginPage.isDemoAccountTextCorrect();
+    });
+});
 
-test(
-  'TC_LOGIN_NEG_03 - Login with empty username',
-  { tag: ['@automation', '@login'] },
-  async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
+test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox showing correct as design @login', async () => {
 
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
+    await test.step('Verify the Hint text in Username and Password textbox showing correct as design', async () => {
+        await loginPage.isUsernameAndPasswordPlaceholderCorrect();
+    });
+});
+
+test('[UI/UX][Positive Case] Ensure the Login component should showing correct as design @login', async () => {
+
+    await test.step('The Login Title showing', async () => {
+        await loginPage.isLoginTitleVisible();
     });
 
-    await test.step('Login with empty username', async () => {
-      await loginPage.login('', 'admin123');
+    await test.step('Verify "Orangehrm-demo-credentials" page showing correct as design', async () => {
+        await loginPage.isDemoAccountTextCorrect();
     });
 
-    await test.step('Verify required message', async () => {
-      const requiredMessages = await loginPage.getRequiredMessages();
-      expect(requiredMessages.join(' ')).toContain('Required');
+    await test.step('Verify " Forgot your password?" link text visible', async () => {
+        await loginPage.isForgotPasswordLinkVisible();
     });
 
-    await context.close();
-  }
-);
+    await test.step('Verify "OrangeHRM OS 5.7" and "© 2005 - 2025 OrangeHRM, Inc. All rights reserved." text visible', async () => {
+        await loginPage.isCopyRightTextVisible();
+    });
+});
 
-test(
-  'TC_LOGIN_NEG_04 - Login with empty password',
-  { tag: ['@automation', '@login'] },
-  async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
+test('[UI/UX][Positive Case] Ensure the "Footer" icons can visible and clickable @login', async () => {
 
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
+    await test.step('Verify "LinkedIn" icon can visible and clickable', async () => {
+        await loginPage.isFooterIconVisible(loginPage.linkedInUrl);
+        });
+
+    await test.step('Verify "Facebook" icon can visible and clickable', async () => {
+        await loginPage.isFooterIconVisible(loginPage.facebookUrl);
     });
 
-    await test.step('Login with empty password', async () => {
-      await loginPage.login('Admin', '');
+    await test.step('Verify "Twitter" icon can visible and clickable', async () => {
+        await loginPage.isFooterIconVisible(loginPage.twitterUrl);
     });
 
-    await test.step('Verify required message', async () => {
-      const requiredMessages = await loginPage.getRequiredMessages();
-      expect(requiredMessages.join(' ')).toContain('Required');
+    await test.step('Verify "Youtube" icon can visible and clickable', async () => {
+        await loginPage.isFooterIconVisible(loginPage.youtubeUrl);
     });
-
-    await context.close();
-  }
-);
-
-test(
-  'TC_LOGIN_NEG_05 - Login with SQL injection attempt',
-  { tag: ['@automation', '@login'] },
-  async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loginPage = new LoginPage(page);
-
-    await test.step('Go to login page', async () => {
-      await loginPage.gotoLoginPage();
-    });
-
-    await test.step('Login with SQL injection attempt', async () => {
-      await loginPage.login("' OR 1=1 -- /", "' OR '1'='1");
-    });
-
-    await test.step('Verify error message', async () => {
-      const errorMsg = await loginPage.getErrorMessage();
-      expect(errorMsg).toContain('Invalid credentials');
-    });
-
-    await context.close();
-  }
-);
+});

@@ -14,8 +14,8 @@
     "test:test:debug": "cross-env TEST_ENV=test playwright test --debug",
     "allure:generate": "allure generate ./allure-results --clean",
     "allure:open": "allure open ./allure-report",
-    "allure:serve": "allure serve ./allure-results"
-
+    "allure:serve": "allure serve ./allure-results",
+    "test:new": "cross-env TEST_ENV=all playwright test --grep @new"
   },
   "keywords": [],
   "author": "",
