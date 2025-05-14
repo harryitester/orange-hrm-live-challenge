@@ -1,5 +1,4 @@
 import { expect, Page } from "@playwright/test";
-import ENV from "../helper/env-config";
 
 export class BasePage {
   readonly page: Page;
@@ -14,7 +13,8 @@ export class BasePage {
   async goto(path: string) {
     const baseUrl = process.env.BASE_URL;
     if (!baseUrl) throw new Error('BASE_URL is not defined in environment variables');
-    await this.page.goto(`${ENV.BASE_URL}`, {
+    await this.page.goto(`${process.env.BASE_URL}`, 
+    {
       waitUntil: "domcontentloaded",
     });
   }
@@ -49,7 +49,7 @@ export class BasePage {
     await expect(element).toBeEnabled();
     await expect(element).toBeVisible();
   }
-  
+
   async verifyBackgroundColor(
     locator: string,
     color: string,

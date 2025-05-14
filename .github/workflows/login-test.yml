@@ -28,6 +28,8 @@ jobs:
             npm ci
       - name: Install cross-env
         run: npm install --save-dev cross-env
+      - name: Check cross-env version
+        run: npx cross-env --version
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
