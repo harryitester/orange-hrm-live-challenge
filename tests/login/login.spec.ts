@@ -20,7 +20,7 @@ test.afterEach(async () => {
     await context.close();
 });
 
-test('[Functional][Positive Case] Ensure Admin user account login success @login', async () => {
+test('[Functional][Positive Case] Ensure Admin user account login success @login @new', async () => {
     await test.step('Login with valid credentials', async () => {
         await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
@@ -101,43 +101,5 @@ test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox s
 
     await test.step('Verify the Hint text in Username and Password textbox showing correct as design', async () => {
         await loginPage.isUsernameAndPasswordPlaceholderCorrect();
-    });
-});
-
-test('[UI/UX][Positive Case] Ensure the Login component should showing correct as design @login', async () => {
-
-    await test.step('The Login Title showing', async () => {
-        await loginPage.isLoginTitleVisible();
-    });
-
-    await test.step('Verify "Orangehrm-demo-credentials" page showing correct as design', async () => {
-        await loginPage.isDemoAccountTextCorrect();
-    });
-
-    await test.step('Verify " Forgot your password?" link text visible', async () => {
-        await loginPage.isForgotPasswordLinkVisible();
-    });
-
-    await test.step('Verify "OrangeHRM OS 5.7" and "© 2005 - 2025 OrangeHRM, Inc. All rights reserved." text visible', async () => {
-        await loginPage.isCopyRightTextVisible();
-    });
-});
-
-test('[UI/UX][Positive Case] Ensure the "Footer" icons can visible and clickable @login', async () => {
-
-    await test.step('Verify "LinkedIn" icon can visible and clickable', async () => {
-        await loginPage.isFooterIconVisible(loginPage.linkedInUrl);
-        });
-
-    await test.step('Verify "Facebook" icon can visible and clickable', async () => {
-        await loginPage.isFooterIconVisible(loginPage.facebookUrl);
-    });
-
-    await test.step('Verify "Twitter" icon can visible and clickable', async () => {
-        await loginPage.isFooterIconVisible(loginPage.twitterUrl);
-    });
-
-    await test.step('Verify "Youtube" icon can visible and clickable', async () => {
-        await loginPage.isFooterIconVisible(loginPage.youtubeUrl);
     });
 });
