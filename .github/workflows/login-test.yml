@@ -38,7 +38,6 @@ jobs:
       - name: Zip Allure HTML report
         if: always()
         run: 
-          cd ./test-reports
           zip -r allure-report.zip ./allure-report
 
       - name: Upload Allure HTML report
@@ -46,6 +45,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-zip
-          path: ./test-reports/allure-report.zip
+          path: ./allure-report.zip
           zip: true
           retention-days: 2
