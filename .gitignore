@@ -8,5 +8,4 @@ node_modules/
 /allure-report/
 /allure-serve/
 /test-reports/
-.env.*
 !.env.example
