@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","11917","[Functional][Positive Case] Ensure Admin user account login success @login @new","chromium","Wed May 14 20:19:44 ICT 2025","passed","Wed May 14 20:19:56 ICT 2025","","login/login.spec.ts","",""

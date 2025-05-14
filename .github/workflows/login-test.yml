@@ -33,12 +33,19 @@ jobs:
         run: npx cross-env TEST_ENV=test npm run test:ci-login
 
       - name: Generate Allure HTML report
-        run: |
-          npx allure generate ./allure-results --clean -o ./allure-report
+        if: always()
+        run: npx allure generate ./allure-results --clean -o ./allure-report
+      - name: Zip Allure HTML report
+        if: always()
+        run: 
+          cd ./test-reports
+          zip -r allure-report.zip ./allure-report
 
       - name: Upload Allure HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: ./allure-report
+          name: allure-report-zip
+          path: ./test-reports/allure-report.zip
+          zip: true
+          retention-days: 2
