@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 import { BasePage } from '../base-pages';
-import ENV from '../../helper/env-config';
 
 export class LoginPage extends BasePage {
   // Locators
