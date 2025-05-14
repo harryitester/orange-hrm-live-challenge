@@ -24,7 +24,9 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: 
+            npm ci
+            npm install --save-dev cross-env
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
