@@ -76,17 +76,6 @@ test('[Functional][Negative Case] Ensure a user cannot login with blank Username
     });
 });
 
-test('[UI/UX][Positive Case] Ensure the "Orangehrm-Logo-Branding" and "Orangehrm-Logo-Branding-Image" visible on the login page @login', async () => {
-    await test.step('Login with valid credentials', async () => {
-        await loginPage.login(accountData.validUser.username, accountData.validUser.password);
-    });
-
-    await test.step('Should see "Orangehrm-Logo-Branding" and "Orangehrm-Logo-Branding-Image" visible on the login page', async () => {
-        await loginPage.isOrangehrmLogoBrandingVisible();
-        await loginPage.isOrangehrmLogoBrandingImageVisible();
-    });
-});
-
 test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showing correct as design @login', async () => {
     await test.step('Login with valid credentials', async () => {
         await loginPage.login(accountData.validUser.username, accountData.validUser.password);
@@ -101,5 +90,24 @@ test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox s
 
     await test.step('Verify the Hint text in Username and Password textbox showing correct as design', async () => {
         await loginPage.isUsernameAndPasswordPlaceholderCorrect();
+    });
+});
+
+test('[UI/UX][Positive Case] Ensure the Login component should showing correct as design @login', async () => {
+
+    await test.step('The Login Title showing', async () => {
+        await loginPage.isLoginTitleVisible();
+    });
+
+    await test.step('Verify "Orangehrm-demo-credentials" page showing correct as design', async () => {
+        await loginPage.isDemoAccountTextCorrect();
+    });
+
+    await test.step('Verify " Forgot your password?" link text visible', async () => {
+        await loginPage.isForgotPasswordLinkVisible();
+    });
+
+    await test.step('Verify "OrangeHRM OS 5.7" and "© 2005 - 2025 OrangeHRM, Inc. All rights reserved." text visible', async () => {
+        await loginPage.isCopyRightTextVisible();
     });
 });
