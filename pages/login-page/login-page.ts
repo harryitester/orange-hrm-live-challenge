@@ -39,8 +39,8 @@ export class LoginPage extends BasePage {
 
   async gotoLoginPage(): Promise<void> {
     const baseUrl = process.env.BASE_URL;
-    if (!baseUrl) throw new Error('BASE_URL is not defined');
-    await this.page.goto(baseUrl);
+    if (!process.env.BASE_URL) throw new Error('BASE_URL is not defined');
+    await this.page.goto(process.env.BASE_URL);
   }
   async verifyInvalidCredentialsMessage(text: string): Promise<void> {
     await this.verifyTextContent(this.invalidCredentialsMessage, text);
