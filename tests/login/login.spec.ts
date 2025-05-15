@@ -13,14 +13,16 @@ test.beforeEach(async ({ browser }) => {
     page = await context.newPage();
     loginPage = new LoginPage(page);
     dashboardPage = new DashboardPage(page);
-    await loginPage.gotoLoginPage();
+    await test.step('Go to login page', async () => {
+        await loginPage.gotoLoginPage();
+    });
 });
 
 test.afterEach(async () => {
     await context.close();
 });
 
-test('[Functional][Positive Case] Ensure Admin user account login success @login @new', async () => {
+test('[Functional][Positive Case] Ensure Admin user account login success @login @regression @sanity', async () => {
     await test.step('Login with valid credentials', async () => {
         await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
@@ -31,7 +33,7 @@ test('[Functional][Positive Case] Ensure Admin user account login success @login
     });
 });
 
-test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username and password @login', async () => {
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username and password @login @regression', async () => {
     await test.step('Login with invalid username and password', async () => {
         await loginPage.login(accountData.invalidUser.username, accountData.invalidUser.password);
     });
@@ -42,7 +44,7 @@ test('[Functional][Negative Case] Ensure Admin user account login failed with in
     });
 });
 
-test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username @login', async () => {
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid username @login @regression', async () => {
     await test.step('Login with invalid username', async () => {
         await loginPage.login(accountData.invalidUser.username, accountData.validUser.password);
     });
@@ -53,7 +55,7 @@ test('[Functional][Negative Case] Ensure Admin user account login failed with in
     });
 });
 
-test('[Functional][Negative Case] Ensure Admin user account login failed with invalid password @login', async () => {
+test('[Functional][Negative Case] Ensure Admin user account login failed with invalid password @login @regression', async () => {
     await test.step('Login with valid username and invalid password', async () => {
         await loginPage.login(accountData.validUser.username, accountData.invalidUser.password);
     });
@@ -64,7 +66,7 @@ test('[Functional][Negative Case] Ensure Admin user account login failed with in
     });
 });
 
-test('[Functional][Negative Case] Ensure a user cannot login with blank Username and Password @login', async () => {
+test('[Functional][Negative Case] Ensure a user cannot login with blank Username and Password @login @regression', async () => {
     await test.step('Login with empty username and password', async () => {
         await loginPage.login('', '');
     });
@@ -76,7 +78,7 @@ test('[Functional][Negative Case] Ensure a user cannot login with blank Username
     });
 });
 
-test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showing correct as design @login', async () => {
+test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showing correct as design @login @regression', async () => {
     await test.step('Login with valid credentials', async () => {
         await loginPage.login(accountData.validUser.username, accountData.validUser.password);
     });
@@ -86,14 +88,14 @@ test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showin
     });
 });
 
-test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox showing correct as design @login', async () => {
+test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox showing correct as design @login @regression', async () => {
 
     await test.step('Verify the Hint text in Username and Password textbox showing correct as design', async () => {
         await loginPage.isUsernameAndPasswordPlaceholderCorrect();
     });
 });
 
-test('[UI/UX][Positive Case] Ensure the Login component should showing correct as design @login', async () => {
+test('[UI/UX][Positive Case] Ensure the Login component should showing correct as design @login @regression', async () => {
 
     await test.step('The Login Title showing', async () => {
         await loginPage.isLoginTitleVisible();

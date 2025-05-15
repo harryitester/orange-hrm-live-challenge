@@ -23,6 +23,10 @@ export class BasePage {
     await this.page.waitForTimeout(time);
   }
 
+  async countNumberOfElement(locator: string): Promise<number> {
+    return this.page.locator(locator).count();
+  }
+  
   async getCurrentUrl(): Promise<string> {
     return this.page.url();
   }

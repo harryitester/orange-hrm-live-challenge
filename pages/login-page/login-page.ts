@@ -33,13 +33,14 @@ export class LoginPage extends BasePage {
     await this.waitAndFill(this.usernameInput, username);
     await this.waitAndFill(this.passwordInput, password);
     await this.waitAndClick(this.loginButton);
-    await this.waitForTimeout(2000); //wait for 2 seconds page to load completed
+    await this.waitForTimeout(2000);
   }
 
   async gotoLoginPage(): Promise<void> {
     const baseUrl = process.env.BASE_URL;
     if (!process.env.BASE_URL) throw new Error('BASE_URL is not defined');
     await this.page.goto(process.env.BASE_URL);
+    await this.waitForTimeout(2000); 
   }
   async verifyInvalidCredentialsMessage(text: string): Promise<void> {
     await this.verifyTextContent(this.invalidCredentialsMessage, text);
