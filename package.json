@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env TEST_ENV=test playwright test",
-    "test:search:chrome": "cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts --project=chrome",
+    "test:search:chrome": "cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts --project=chromium",
     "test:search:firefox": "cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts --project=firefox",
     "test:search:edge": "cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts --project=edge",
     "test:search:all": "cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts",
-    "test:login:chrome": "cross-env TEST_ENV=test playwright test tests/login/login.spec.ts --project=chrome",
+    "test:login:chrome": "cross-env TEST_ENV=test playwright test tests/login/login.spec.ts --project=chromium",
     "test:login:firefox": "cross-env TEST_ENV=test playwright test tests/login/login.spec.ts --project=firefox",
     "test:login:edge": "cross-env TEST_ENV=test playwright test tests/login/login.spec.ts --project=edge",
     "test:login:all": "cross-env TEST_ENV=test playwright test tests/login/login.spec.ts",

@@ -1,5 +1,15 @@
-# CPP Test Automation E2E with Playwright and Typescript
-This is the repository to run the test for weather.com with playwright tyepscript and page object model
+Automated end-to-end tests for OrangeHRM Demo using Playwright and TypeScript.
+🛠️ Tech Stack
+    Language: TypeScript
+    Framework: Playwright
+    Design Pattern: Page Object Model (POM)
+    Cross-Environment: Managed by cross-env
+    Reporting: Playwright HTML & Allure
+Tags:
+    @login – Login page tests
+    @search – Search page tests
+    @sanity – Sanity suite
+    @regression – Regression suite
 
 # Getting Start
 1. [Playwright](https://playwright.dev/)
@@ -16,36 +26,84 @@ The following softwares are required:
 
 
 # Set up
-1. CLone this repository to your machine
+1. CLone this repository to your machine: 
+    `git clone https://github.com/harryitester/orange-hrm-live-challenge.git`
+    `cd orange-hrm-live-challenge`
+
 2. Running npm install to download and create node_modules section
- 
-```
-npm install
-```
+    `npm install`
+    `npm ci`
+
 3. Download playwright supported browsers by below command
-```
-npx playwright install --with-deps
-```
+    `npx playwright install --with-deps`
+For Microsoft Edge (optional)
+    `npx playwright install msedge`
+
+
 4. If "cross-env" cannot be found on your machine, execute below command to install globaly
-```
-npm install -g cross-env
-```
+
+`npm install -g cross-env`
+
 - Running with specific environment, country by passing the process environments (using country to get the correct localization to navigate or url)
-```
-// environment = [test, production, prerelease]
+
+// environment = [test, production(don't have infor), prerelease(don't have infor)]
 // scriptFilePath = copy relative path of the test spec file
+
 cross-env test_env=${envionment} npx playwright test ${scriptFilePath}
 
-```
+
 - Running with specific grep
-@smoke
+@login
+@search
 @sanity
 @regression
 cross-env test_env=${envionment} npx playwright test ${scriptFilePath} --grep ${grep}
 
-```
-```
-5. To generate the allure report also open.
-```
-npm run allure:generate
-```
+
+To run all test on local:
+    `npm test`
+
+
+To Run Only Login Tests:
+    `npm run test:login`
+
+
+
+Run with a Tag (e.g., @new):
+    `npx cross-env TEST_ENV=production npx playwright test --grep @new`
+
+
+
+To Run with a Specific Environment:
+    `npx cross-env TEST_ENV=production npm run test:login`
+    `npx cross-env TEST_ENV=test npm run test:login`
+
+
+
+To Run with a Specific browser such as `chrome`:
+    `cross-env TEST_ENV=test playwright test tests/search/search-menu.spec.ts --project=chromium`
+
+
+6. Viewing Reports Locally
+1. HTML Report
+After running tests, open the HTML report:
+    `npx playwright show-report test-reports/html`
+or open the playwright-report/index.html file in your browser.
+
+2. Allure Report
+Generate the Allure Report
+`npx allure generate ./test-reports/allure-results --clean -o ./test-reports/allure-report`
+
+Open the Allure Report
+    `npx allure open ./allure-report`
+This will open the Allure report in your default browser.
+
+
+7. Running Tests in GitHub Actions (CI)
+    Go to your repository on GitHub: https://github.com/harryitester/orange-hrm-live-challenge/actions  
+    Select the latest workflow run or dirrect navigate to :https://github.com/harryitester/orange-hrm-live-challenge/actions
+    View the job logs for test results.
+    Download the Allure report artifact:
+    Find the "Artifacts" section (e.g., allure-report-zip).
+    Click to download the zip file.
+    Unzip and open index.html in your browser to view the report.
