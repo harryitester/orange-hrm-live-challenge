@@ -1,14 +1,13 @@
-name: Login Tests
+name: Search Function Tests
 
 on:
-    push:
-        branches: [ main ]
+##    push:
+##        branches: [ main ]
     pull_request:
         branches: [ main ]
 jobs:
   login-test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         browser:
@@ -34,7 +33,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright login tests
-        run: npx cross-env TEST_ENV=test npm run test:login
+        run: npx cross-env TEST_ENV=test npm run test:search
 
       - name: Generate Allure report
         if: always()

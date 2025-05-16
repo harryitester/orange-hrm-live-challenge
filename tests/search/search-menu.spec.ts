@@ -35,7 +35,7 @@ test('[UI/UX][Positive Case] Verify the Default Sidebar Menu - 12 Menu Item @sea
 
 test('[Functional][Positive Case] Search menu then click on the result to navigate to correct page @search @regression @sanity', async () => {
   await test.step('Search with keyword "DASHBOARD"', async () => {
-    await searchPage.searchMenu(searchKeywords.tenChar);
+    await searchPage.searchMenu(searchKeywords.dashboard);
   });
   await test.step('Verify the menu results contain the keyword "DASHBOARD"', async () => {
     await searchPage.verifyMenuResultsContainKeyword(searchKeywords.dashboard);
@@ -58,7 +58,7 @@ test('[Functional][Positive Case] Search with keyword "G" returns 0 menu items @
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "P" returns 1 menu item @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "P" returns correct menu item @search @regression', async () => {
   await test.step('Search with keyword "P"', async () => {
     await searchPage.searchMenu(searchKeywords.oneChar);
   });
@@ -67,7 +67,7 @@ test('[Functional][Positive Case] Search with keyword "P" returns 1 menu item @s
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PE" returns 2 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PE" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PE"', async () => {
     await searchPage.searchMenu(searchKeywords.twoChar);
   });
@@ -76,7 +76,7 @@ test('[Functional][Positive Case] Search with keyword "PE" returns 2 menu items 
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PER" returns 3 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PER" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PER"', async () => {
     await searchPage.searchMenu(searchKeywords.threeChar);
   });
@@ -85,7 +85,7 @@ test('[Functional][Positive Case] Search with keyword "PER" returns 3 menu items
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PERF" returns 4 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERF" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERF"', async () => {
     await searchPage.searchMenu(searchKeywords.fourChar);
   });
@@ -94,7 +94,7 @@ test('[Functional][Positive Case] Search with keyword "PERF" returns 4 menu item
   });
 }); 
 
-test('[Functional][Positive Case] Search with keyword "PERFO" returns 5 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERFO" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERFO"', async () => {
     await searchPage.searchMenu(searchKeywords.fiveChar);
   });
@@ -103,7 +103,7 @@ test('[Functional][Positive Case] Search with keyword "PERFO" returns 5 menu ite
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PERFOR" returns 6 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERFOR" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERFOR"', async () => {
     await searchPage.searchMenu(searchKeywords.sixChar);
   });
@@ -112,7 +112,7 @@ test('[Functional][Positive Case] Search with keyword "PERFOR" returns 6 menu it
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PERFORM" returns 7 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERFORM" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERFORM"', async () => {
     await searchPage.searchMenu(searchKeywords.sevenChar);
   });
@@ -121,7 +121,7 @@ test('[Functional][Positive Case] Search with keyword "PERFORM" returns 7 menu i
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PERFORMA" returns 8 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERFORMA" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERFORMAN"', async () => {
     await searchPage.searchMenu(searchKeywords.eightChar);
   });
@@ -130,7 +130,7 @@ test('[Functional][Positive Case] Search with keyword "PERFORMA" returns 8 menu 
   });
 });
 
-test('[Functional][Positive Case] Search with keyword "PERFORMANC" returns 9 menu items @search @regression', async () => {
+test('[Functional][Positive Case] Search with keyword "PERFORMANC" returns correct menu items @search @regression', async () => {
   await test.step('Search with keyword "PERFORMANCE"', async () => {
     await searchPage.searchMenu(searchKeywords.nineChar);
   });

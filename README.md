@@ -1,4 +1,28 @@
 Automated end-to-end tests for OrangeHRM Demo using Playwright and TypeScript.
+playwright-automation-framework/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                        # GitHub Actions for CI/CD
+├── tests/
+│   ├── login.spec.ts                    # login test spec
+│   └── search-menu-spec.ts              # search function test spec
+├── pages/                               # POM: Page Object Models
+│   ├── base-pages.ts
+│   └── login-page.ts
+│   └── search-function-page.ts
+│   └── dashboard-page.ts
+├── data/                               # Test data
+│   └── account.ts                      
+│   └── searchData.ts
+├── env/
+│   └── .env.test                       # Cross environment setup for test
+├── helper/
+│   └── global-setup.ts                 # Cross environment setup for test
+├── playwright.config.ts                # Playwright configuration (cross-browser, retries, reporter)
+├── tsconfig.json                       # TypeScript configuration
+├── package.json                        # Dependencies and scripts
+├── README.md
+
 🛠️ Tech Stack
     Language: TypeScript
     Framework: Playwright

@@ -1,8 +1,8 @@
-name: Login Tests
+name: Regression Tests
 
 on:
-    push:
-        branches: [ main ]
+##    push:
+##        branches: [ main ]
     pull_request:
         branches: [ main ]
 jobs:
@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        browser:
-          - chromium
-          - firefox
-          - webkit
-
-        env: [test]
+        matrix:
+          browser:
+            - chromium
+            - firefox
+            - webkit
+  
+          env: [test]
 
     steps:
       - name: Checkout repository
@@ -34,7 +34,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright login tests
-        run: npx cross-env TEST_ENV=test npm run test:login
+        run: npx cross-env TEST_ENV=test npm run test
 
       - name: Generate Allure report
         if: always()

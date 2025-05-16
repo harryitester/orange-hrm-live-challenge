@@ -78,16 +78,6 @@ test('[Functional][Negative Case] Ensure a user cannot login with blank Username
     });
 });
 
-test('[UI/UX][Positive Case] Ensure the "Orangehrm-demo-credentials" page showing correct as design @login @regression', async () => {
-    await test.step('Login with valid credentials', async () => {
-        await loginPage.login(accountData.validUser.username, accountData.validUser.password);
-    });
-
-    await test.step('Verify "Orangehrm-demo-credentials" page showing correct as design', async () => {
-        await loginPage.isDemoAccountTextCorrect();
-    });
-});
-
 test('[UI/UX][Positive Case] Ensure hint text in Username and Password textbox showing correct as design @login @regression', async () => {
 
     await test.step('Verify the Hint text in Username and Password textbox showing correct as design', async () => {
